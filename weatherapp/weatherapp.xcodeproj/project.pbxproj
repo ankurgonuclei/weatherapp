@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		070FBFCE287274BA005880F7 /* DoubleTempFConversion.swift in Sources */ = {isa = PBXBuildFile; fileRef = 070FBFCD287274BA005880F7 /* DoubleTempFConversion.swift */; };
 		079D0E34286CB37C004D8E39 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 079D0E33286CB37C004D8E39 /* AppDelegate.swift */; };
 		079D0E36286CB37C004D8E39 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 079D0E35286CB37C004D8E39 /* SceneDelegate.swift */; };
 		079D0E38286CB37C004D8E39 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 079D0E37286CB37C004D8E39 /* ViewController.swift */; };
@@ -40,6 +41,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		070FBFCD287274BA005880F7 /* DoubleTempFConversion.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DoubleTempFConversion.swift; sourceTree = "<group>"; };
 		079D0E30286CB37C004D8E39 /* weatherapp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = weatherapp.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		079D0E33286CB37C004D8E39 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		079D0E35286CB37C004D8E39 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -116,6 +118,7 @@
 				079D0E3C286CB37D004D8E39 /* Assets.xcassets */,
 				079D0E3E286CB37D004D8E39 /* LaunchScreen.storyboard */,
 				079D0E41286CB37D004D8E39 /* Info.plist */,
+				070FBFCD287274BA005880F7 /* DoubleTempFConversion.swift */,
 			);
 			path = weatherapp;
 			sourceTree = "<group>";
@@ -291,6 +294,7 @@
 				079D0E67286E1999004D8E39 /* WeatherTableViewCell.swift in Sources */,
 				079D0E38286CB37C004D8E39 /* ViewController.swift in Sources */,
 				079D0E6B286E19DB004D8E39 /* HourlyTableViewCell.swift in Sources */,
+				070FBFCE287274BA005880F7 /* DoubleTempFConversion.swift in Sources */,
 				079D0E34286CB37C004D8E39 /* AppDelegate.swift in Sources */,
 				079D0E36286CB37C004D8E39 /* SceneDelegate.swift in Sources */,
 			);
@@ -473,7 +477,6 @@
 				CURRENT_PROJECT_VERSION = 1;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = weatherapp/Info.plist;
-				INFOPLIST_KEY_NSLocationAlwaysAndWhenInUseUsageDescription = "Please allow location to see local weather.";
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
 				INFOPLIST_KEY_UIMainStoryboardFile = Main;
@@ -501,7 +504,6 @@
 				CURRENT_PROJECT_VERSION = 1;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = weatherapp/Info.plist;
-				INFOPLIST_KEY_NSLocationAlwaysAndWhenInUseUsageDescription = "Please allow location to see local weather.";
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
 				INFOPLIST_KEY_UIMainStoryboardFile = Main;

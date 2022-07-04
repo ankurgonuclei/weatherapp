@@ -9,22 +9,29 @@ import UIKit
 import CoreLocation
 
 class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSource,  CLLocationManagerDelegate {
-
-    @IBOutlet var table: UITableView!
-    var models = [Weather]()
+    /*/
+     var temp: Double
+     var feelsLike: Double
+     var tempMin: Double
+     var tempMax: Double
+     var pressure: Double
+     var humidity: Double*/
+    
+    @IBOutlet var tempLabel: UILabel!
+    @IBOutlet var placeLabel: UILabel!
+    @IBOutlet var feelsLikeLabel: UILabel!
+    @IBOutlet var tempMinLabel: UILabel!
+    @IBOutlet var tempMaxLabel: UILabel!
+    @IBOutlet var pressureLabel: UILabel!
+    @IBOutlet var humidityLabel: UILabel!
+    
+    var models = [WeatherResponse]()
     
     let locationManager = CLLocationManager()
     var currentLocation: CLLocation?
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
-        table.register(HourlyTableViewCell.nib(), forCellReuseIdentifier: HourlyTableViewCell.identifier)
-        table.register(WeatherTableViewCell.nib(), forCellReuseIdentifier: WeatherTableViewCell.identifier)
-        
-        table.delegate = self
-        table.dataSource = self
-            
     }
     
     override func viewDidAppear(_ animated: Bool) {
@@ -51,12 +58,53 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
             return
         }
         
-        let long = currentLocation.coordinate.longitude
+        let lon = currentLocation.coordinate.longitude
         let lat = currentLocation.coordinate.latitude
         
-        print("\(long) | \(lat)")
-
+        print("\(lon) | \(lat)")
+        
+        let url = "https://api.openweathermap.org/data/2.5/weather?lat=\(lat)&lon=\(lon)&appid=a25168da5eb0e24e796fb52861b8a366"
+        
+        print("url path: \(url)")
+        
+        URLSession.shared.dataTask(with: URL(string: url)!, completionHandler: { data, response, error in
+            
+            // Validation
+            guard let data = data, error == nil else {
+                print("something went wrong")
+                return
+            }
+            
+            // Convert data to models/some object
+            var json: WeatherResponse?
+            do {
+                json = try JSONDecoder().decode(WeatherResponse.self, from: data)
+            }
+            catch {
+                print("error: \(error)")
+            }
+            
+            guard let result = json else {
+                return
+            }
+            
+            print("result: \(result.main.feelsLike)")
+            
+            DispatchQueue.main.async {
+                self.tempLabel.text = String(format: "%.2f", (result.main.temp).kelvinToCelsius) + "° C"
+                self.placeLabel.text = result.name
+                self.feelsLikeLabel.text = String(format: "%.2f", (result.main.feelsLike).kelvinToCelsius) + "° C"
+                self.tempMinLabel.text = String(format: "%.2f", (result.main.tempMin).kelvinToCelsius) + "° C"
+                self.tempMaxLabel.text = String(format: "%.2f", (result.main.tempMax).kelvinToCelsius) + "° C"
+                self.pressureLabel.text = String(format: "%.2f", (result.main.pressure))
+                self.humidityLabel.text = String(format: "%.2f", (result.main.humidity))
+            }
+            
+        }).resume()
+        
     }
+    
+    
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return models.count
@@ -67,7 +115,26 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
     }
 }
 
-struct Weather {
+struct WeatherResponse: Decodable {
+    var main: Main
+    var name: String
     
+    struct Main: Decodable {
+        var temp: Double
+        var feelsLike: Double
+        var tempMin: Double
+        var tempMax: Double
+        var pressure: Double
+        var humidity: Double
+        
+        enum CodingKeys: String, CodingKey {
+            case temp
+            case pressure
+            case humidity
+            case feelsLike = "feels_like"
+            case tempMin = "temp_min"
+            case tempMax = "temp_max"
+        }
+    }
 }
 
